@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import FormUserDetails from "./FormUserDetails";
-import FormPersonalDetails from "./FormPersonalDetail";
-import Confirm from "./Confirm";
-import Success from "./Success";
+import FormRFUnit from "./FormRFUnit";
+import FormCheckOut from "./FormCheckOut";
 
 export class UserForm extends Component {
 	state = {
 		step: 1,
-		firstName: "",
-		lastName: "",
-		email: "",
-		occupation: "",
-		city: "",
-		bio: ""
+		rfUnit: "",
+		userID: "",
+		status: "",
+		checkIn: "",
+		inCondition: "",
+		checkOut: "",
+		outCondition: "",
+		comments: ""
 	};
 
 	//proceed to next step
@@ -37,12 +37,30 @@ export class UserForm extends Component {
 	};
 	render() {
 		const { step } = this.state;
-		const { firstName, lastName, email, occupation, city, bio } = this.state;
-		const values = { firstName, lastName, email, occupation, city, bio };
+		const {
+			rfUnit,
+			userID,
+			status,
+			checkIn,
+			inCondition,
+			checkOut,
+			outCondition,
+			comments
+		} = this.state;
+		const values = {
+			rfUnit,
+			userID,
+			status,
+			checkIn,
+			inCondition,
+			checkOut,
+			outCondition,
+			comments
+		};
 		switch (step) {
 			case 1:
 				return (
-					<FormUserDetails
+					<FormRFUnit
 						nextStep={this.nextStep}
 						handleChange={this.handleChange}
 						values={values}
@@ -50,7 +68,7 @@ export class UserForm extends Component {
 				);
 			case 2:
 				return (
-					<FormPersonalDetails
+					<FormCheckOut
 						nextStep={this.nextStep}
 						prevStep={this.prevStep}
 						handleChange={this.handleChange}
@@ -58,21 +76,11 @@ export class UserForm extends Component {
 					/>
 				);
 			case 3:
-				return (
-					<Confirm
-						nextStep={this.nextStep}
-						prevStep={this.prevStep}
-						values={values}
-					/>
-				);
+				return <h1>Confirm</h1>;
 			case 4:
-				return (
-					<Success
-						prevStep={this.prevStep}
-						handleChange={this.handleChange}
-						values={values}
-					/>
-				);
+				return <h1>Success</h1>;
+			default:
+				return <h1>Default</h1>;
 		}
 	}
 }
